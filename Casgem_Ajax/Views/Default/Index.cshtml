@@ -49,6 +49,17 @@
         
         <br /> <hr />
     </div>
+    <div>
+        <input type="text" class="form-control"  placeholder="Güncellenecek müşteri ID " id="txteditid"/>
+        <br />
+        <input type="text" class="form-control"  placeholder="Güncellenecek müşteri Adı " id="txteditname"/>
+        <br />
+        <input type="text" class="form-control" placeholder="Güncellenecek müşteri Soyadı " id="txteditsurname" />
+        <br />
+        <input type="text" class="form-control" placeholder="Güncellenecek müşteri Şehri " id="txteditcity" />
+        <br />
+    </div>
+
 </div>
 
 <script>
@@ -139,5 +150,26 @@
                 $("#customerlistbyid").html(htmlstr);
             }
         });
+    });
+    $("#btncustomeredit").click(function () {
+        let values={
+            CustomerID:$("#txteditid").val(),
+            Name: $("#txteditname").val(),
+            Surname: $("#txteditsurname").val(),
+            City: $("#txteditcity").val()
+            
+        };
+        $.ajax({
+            type: "post",
+            url: "/Default/UpdateCustomer/",
+            data: values,
+            success: function (funk5) {
+                let result = jQuery.parseJSON(funk5);
+                //alert("Müşteri başarıyla eklendi Görmek için tekrar müşteri listesine basınız");
+                swal("Müşteri başarılı bir şekilde güncelledi");
+            }
+        });
+
+
     });
 </script>
